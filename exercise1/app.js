@@ -23,3 +23,11 @@ console.log(jirafales.getName());
 let worstCourse = new Course('The Worst', 3);
 
 worstCourse.addStudent(pepe, carla, laura);
+worstCourse.removeStudent(carla.id);
+worstCourse.setTeacher(jirafales);
+
+console.log(worstCourse.students);
+console.log(worstCourse.teacher);
+
+let menu = require('./menu');
+menu();

@@ -11,14 +11,18 @@ class Course {
     this.teacher = teacher;
   }
 
-  addStudent(...students) {
-    for (let i = 0; i < this.students.length; i++) {
-      this.students.push(student);
+  addStudent() {
+    for (let i = 0; i < arguments.length; i++) {
+      this.students.push(arguments[i]);
     }
   }
 
-  removeStudent() {
-
+  removeStudent(id) {
+    for (let i = 0; i < this.students.length; i++) {
+      if (this.students[i].id === id) {
+        this.students.splice(i, 1);
+      }
+    }
   }
 }
 

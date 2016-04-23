@@ -2,7 +2,7 @@
 const Person = require('./person.js');
 
 class Teacher extends Person {
-  constructor(name, address, birth_date, avg_grade) {
+  constructor(name, address, birth_date) {
     super(name, address, birth_date);
   }
 
