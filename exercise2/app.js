@@ -8,26 +8,39 @@ for (let i = 0; i < 10; i++) {
 }
 
 // 2.
-let start = (cb) => {
-  process1('Process 1 OK.\n', cb);
-};
-
-let process1 = (data, cb) => {
-  data += 'Process 2 OK.\n';
-  process2(data, cb);
-};
-
-let process2 = (data, cb) => {
-  data += 'Process 3 OK.\n';
-  lastProcess(data, cb);
-};
-
-let lastProcess = (data, cb) => {
-  cb(data);
-};
-
-start((data) => {
-  console.log(data + 'The calls are finished successfully.');
-});
+let callbacks = require('./callbacks');
+callbacks();
 
 // 3.
+let events = require('./event_emitter')
+events();
+
+// 4.
+const fs = require('fs');
+
+let user = {
+  name: 'Pedro',
+  lastname: 'Rodriguez',
+  age: 25,
+  dob: '02/08/2001'
+};
+
+let read = function(filePath) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filePath, JSON.stringify(user, null, 2), (err, data) => {
+      if (err) {
+        reject(err);
+      }
+
+      resolve('success');
+    });
+  });
+};
+
+read('./users.txt').then((data) => {
+  console.log('JSON saved stated: ' + data);
+})
+.catch((err) => {
+  console.log(err);
+  throw err;
+});
