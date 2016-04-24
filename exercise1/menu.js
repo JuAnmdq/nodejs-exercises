@@ -2,7 +2,8 @@
 
 const readline    = require('readline'),
       studentForm = require('./student_form'),
-      teacherForm = require('./teacher_form');
+      teacherForm = require('./teacher_form'),
+      list        = require('./lists').list;
 
 const rl = readline.createInterface(process.stdin, process.stdout);
 
@@ -28,6 +29,7 @@ let menu = function() {
         break;
       case 3:
         console.log('You picked the option 3');
+        list();
         break;
       case 4:
         console.log('You picked the option 4');

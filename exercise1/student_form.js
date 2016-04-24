@@ -1,7 +1,8 @@
 'use strict';
 
 const readlineSync = require('readline-sync'),
-      Student      = require('./models/student');
+      Student      = require('./models/student'),
+      studentList  = require('./lists').students;
 
 let studentForm = function() {
   console.log('Student\'s Form');
@@ -18,6 +19,8 @@ let studentForm = function() {
                Address: ${student.address}
                Birth date: ${student.birth_date}
                Average: ${student.avg_grade}`);
+
+  studentList.push(student);
 };
 
 module.exports = studentForm;
