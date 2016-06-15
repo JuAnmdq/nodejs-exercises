@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 // Times method exercise
 String.prototype.times = function(times) {
@@ -8,6 +8,9 @@ String.prototype.times = function(times) {
 console.log('*'.times(10));
 
 // Models exercise
+
+const requiredAverage = 7;
+
 const Student = require('./models/student'),
       Teacher = require('./models/teacher'),
       Course  = require('./models/course');

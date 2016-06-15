@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const readlineSync = require('readline-sync'),
       Student      = require('./models/student'),
@@ -15,6 +15,7 @@ let studentForm = function() {
   let student = new Student(name, address, birth_date, avg_grade);
 
   console.log(`You registered the Student:
+               Id: ${student.id}
                Name: ${student.name}
                Address: ${student.address}
                Birth date: ${student.birth_date}

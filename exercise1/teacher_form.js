@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const readlineSync = require('readline-sync'),
       Teacher      = require('./models/teacher');

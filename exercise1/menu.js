@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const readline    = require('readline'),
       studentForm = require('./student_form'),
@@ -23,13 +23,15 @@ let menu = function() {
     switch (parseInt(data)) {
       case 1:
         studentForm();
+        this();
         break;
       case 2:
         teacherForm();
+        menu();
         break;
       case 3:
         console.log('You picked the option 3');
-        list();
+        console.log(list);
         break;
       case 4:
         console.log('You picked the option 4');

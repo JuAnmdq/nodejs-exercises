@@ -1,6 +1,0 @@
-{
-  "name": "Pedro",
-  "lastname": "Rodriguez",
-  "age": 25,
-  "dob": "02/08/2001"
-}

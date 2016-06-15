@@ -1,4 +1,5 @@
 'use strict'
+
 const Person = require('./person.js');
 
 class Teacher extends Person {
