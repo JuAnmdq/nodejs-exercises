@@ -16,6 +16,10 @@ let events = require('./event_emitter')
 events();
 
 // 4.
+const UserService = require('./user_service');
+
+let username = 'Pedrito';
+
 let user = {
     name: 'Pedro',
     lastname: 'Rodriguez',
@@ -23,9 +27,44 @@ let user = {
     dob: '02/08/2001'
 };
 
-const UserService = require('./user_service');
+let newUser = {
+    name: 'Pedrito',
+    lastname: 'Sanchez',
+    age: 29,
+    dob: '02/08/2001'
+};
 
-//UserService.create(user);
+// This services gets all the data for first time
+UserService.retrieve().then((data) => {
+    console.log(data);
+    main();
+}, (err)  => {
+    console.error(err);
+});
 
-UserService.retrieve().then((data) => { console.log(data); },
-                            (err)  => { console.error(err);});
+var main = () => {
+    UserService.create(user).then((data) => {
+        console.log(data);
+    }, (err) => {
+        console.error(err);
+    });
+
+    UserService.retrieveByName(username).then((data) => {
+        debugger;
+        console.log(data);
+    }, (err) => {
+        console.error(err);
+    });
+
+    UserService.update(newUser).then((data) => {
+        console.log(data);
+    }, (err) => {
+        console.error(err);
+    });
+
+    UserService.delete(username).then((data) => {
+        console.log(data);
+    }, (err) => {
+        console.error(err);
+    });
+};

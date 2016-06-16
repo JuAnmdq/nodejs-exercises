@@ -4,94 +4,106 @@ const fs = require('fs');
 
 let users = [];
 
-var isUserRegistered = function(username) {
+let isUserRegistered = (username) => {
     return users.some((user) => {
+        return user.name === username;
+    });
+};
+
+let findByName = (username) => {
+    return users.find((user) => {
         return user.name === username;
     });
 };
 
 function UserService() {
     return {
-        create: function(user) {
-            fs.readFile('users.json', function(err, data) {
-                /*
-                if (err) {
-                    return console.error(err);
+        create: (user) => {
+            return new Promise((resolve, reject) => {
+                if (!isUserRegistered(user.name)) {
+                    users.push(user);
+                    // I get the index because I pass the collection for write in users.json, and if its fail I delete the object in array
+                    let index = users.indexOf(user);
+
+                    fs.writeFile('users.json', JSON.stringify(users, null, 2), (err) => {
+                        if (err) {
+                            users.splice(index, 1);
+                            reject(err.message);
+                        }
+
+                        resolve('You have save a new user successfully');
+                    });
+                } else {
+                    reject('The user is already in the Database');
                 }
-
-                users = JSON.parse(data);*/
-
-                this.retrieve().then(function(data) {
-                    debugger;
-                    users = data;
-
-                    if (!isUserRegistered(user.name)) {
-                        users.push(user);
-
-                        fs.writeFile('users.json', JSON.stringify(users, null, 2), (err) => {
-                            if (err) {
-                                return console.error(err);
-                            }
-
-                            console.log('You saved a new user successfully');
-                            users = [];
-                        });
-                    } else {
-                        // I have to replace it for reject
-                        console.error('The user is already in the Database');
-                    }
-                }, function(err) {
-                    console.error(err);
-                });
             });
         },
-        retrieve: function() {
-            return new Promise(function(resolve, reject) {
-                fs.readFile('users.json', function(err, data) {
+        retrieve: () => {
+            return new Promise((resolve, reject) => {
+                fs.readFile('users.json', (err, data) => {
                     if (err) {
-                        reject(err);
+                        reject(err.message);
                     }
 
                     users = JSON.parse(data);
                     resolve(users);
                 });
             });
+        },
+        retrieveByName: (username) => {
+            return new Promise((resolve, reject) => {
+                if (isUserRegistered(username)) {
+                    let user = findByName(username);
+                    resolve(user);
+                } else {
+                    reject('The user doesn\'t exists')
+                }
+            });
+        },
+        update: (newUser) => {
+            return new Promise((resolve, reject) => {
+                if (isUserRegistered(newUser.name)) {
+                    let oldUser = findByName(newUser.name),
+                        index = users.indexOf(oldUser);
+
+                    users[index] = newUser;
+
+                    fs.writeFile('users.json', JSON.stringify(users, null, 2), (err) => {
+                        debugger;
+                        if (err) {
+                            users[index] = oldUser;
+                            reject(err.message);
+                        }
+
+                        resolve('You have update the user successfully');
+                    });
+                } else {
+                    reject('The user doesn\'t exists')
+                }
+            });
+        },
+        delete: (username) => {
+            return new Promise((resolve, reject) => {
+                if (isUserRegistered(username)) {
+                    let user = findByName(username),
+                        index = users.indexOf(user);
+
+                    users.splice(index, 1);
+
+                    fs.writeFile('users.json', JSON.stringify(users, null, 2), (err) => {
+                        if (err) {
+                            users.push(user);
+                            reject(err.message);
+                        }
+
+                        resolve('You have delete the user successfully');
+                    });
+                } else {
+                    reject('The user doesn\'t exists')
+                }
+            });
         }
     };
 };
 
 module.exports = UserService();
-/*
-var create = function() {
-    return new Promise(function(resolve, reject) {
-
-
-    });
-};
-
-var retrieveByName = function() {
-
-
-    return new Promise(function(resolve, reject) {
-
-
-    });
-};
-
-var update = function() {
-
-
-    return new Promise(function(resolve, reject) {
-
-
-    });
-};
-
-var delete = function() {
-
-
-    return new Promise(function(resolve, reject) {
-
-
-    });
-};*/

@@ -1,13 +1,13 @@
 [
   {
-    "name": "Pedrito",
-    "lastname": "Rodriguez",
+    "name": "Pedro",
+    "lastname": "Rodrigues",
     "age": 25,
     "dob": "02/08/2001"
   },
   {
-    "name": "Pedro",
-    "lastname": "Rodriguez",
+    "name": "Carlos",
+    "lastname": "Rodrigues",
     "age": 25,
     "dob": "02/08/2001"
   }
