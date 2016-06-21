@@ -1,9 +1,13 @@
 'use strict'
 
+let id = 0;
+
 class Course {
     constructor(name, minimum_avg_grade) {
+        this.id = ++id;
         this.name = name;
         this.students = [];
+        this.teacher = {};
         this.minimum_avg_grade = minimum_avg_grade;
     }
 
@@ -15,6 +19,10 @@ class Course {
         for (let i = 0; i < arguments.length; i++) {
             this.students.push(arguments[i]);
         }
+    }
+
+    setTeacher(teacher) {
+        this.teacher = teacher;
     }
 
     removeStudent(id) {

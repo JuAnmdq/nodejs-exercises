@@ -1,25 +1,38 @@
 'use strict'
 
-const readlineSync = require('readline-sync'),
-      Teacher = require('./models/teacher');
+const Teacher = require('./models/teacher');
 
-let teacherList = require('./studentList');
+let teacherList = require('./teacher_list');
 
-let teacherForm = function() {
+let name = '',
+    address = '',
+    birth_date = '';
+
+let teacherForm = function(rl) {
     console.log('Teacher\'s Form');
 
-    let name       = readlineSync.question('Introduce your name: '),
-        address    = readlineSync.question('\nIntroduce your address: '),
-        birth_date = readlineSync.question('\nIntroduce your birth date: ');
+    rl.question('Introduce your name: ', (answer) => {
+        name = answer;
 
-    let teacher = new Teacher(name, address, birth_date);
+        rl.question('Introduce your address: ', (answer) => {
+            address = answer;
 
-    console.log(`You registered a teacher:
-               Name: ${teacher.name}
-               Address: ${teacher.address}
-               Birth date: ${teacher.birth_date}`);
+            rl.question('Introduce your birth date: ', (answer) => {
+                birth_date = answer;
 
-    teacherList.push(teacher);
+                let teacher = new Teacher(name, address, birth_date);
+
+                console.log(`\nYou registered the Teacher:
+                Id: ${teacher.id}
+                Name: ${teacher.name}
+                Address: ${teacher.address}
+                Birth date: ${teacher.birth_date}`);
+
+                teacherList.push(teacher);
+                rl.close();
+            });
+        });
+    });
 };
 
 module.exports = teacherForm;

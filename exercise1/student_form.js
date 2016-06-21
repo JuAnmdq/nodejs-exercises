@@ -1,28 +1,44 @@
 'use strict'
 
-const readlineSync = require('readline-sync'),
-      Student      = require('./models/student');
+const Student  = require('./models/student');
 
-let studentList  = require('./studentList');
+let studentList  = require('./student_list');
 
-let studentForm = function() {
+let name = '',
+    address = '',
+    birth_date = '',
+    avg_grade = '';
+
+let studentForm = function(rl) {
     console.log('Student\'s Form');
 
-    let name = readlineSync.question('Introduce your name: '),
-        address = readlineSync.question('\nIntroduce your address: '),
-        birth_date = readlineSync.question('\nIntroduce your birth date: '),
-        avg_grade = readlineSync.question('\nIntroduce your average: ');
+    rl.question('Introduce your name: ', (answer) => {
+        name = answer;
 
-    let student = new Student(name, address, birth_date, avg_grade);
+        rl.question('Introduce your address: ', (answer) => {
+            address = answer;
 
-    console.log(`You registered the Student:
-               Id: ${student.id}
-               Name: ${student.name}
-               Address: ${student.address}
-               Birth date: ${student.birth_date}
-               Average: ${student.avg_grade}`);
+            rl.question('Introduce your birth date: ', (answer) => {
+                birth_date = answer;
 
-    studentList.push(student);
+                rl.question('Introduce your average: ', (answer) => {
+                    avg_grade = answer;
+
+                    let student = new Student(name, address, birth_date, avg_grade);
+
+                    console.log(`\nYou registered the Student:
+                    Id: ${student.id}
+                    Name: ${student.name}
+                    Address: ${student.address}
+                    Birth date: ${student.birth_date}
+                    Average: ${student.avg_grade}`);
+
+                    studentList.push(student);
+                    rl.close();
+                });
+            });
+        });
+    });
 };
 
 module.exports = studentForm;

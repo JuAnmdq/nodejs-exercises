@@ -3,21 +3,19 @@
 const readline    = require('readline'),
       studentForm = require('./student_form'),
       teacherForm = require('./teacher_form'),
-      enrollMenu  = require('./enroll_menu');
+      enrollMenu  = require('./enroll_menu'),
+      teachMenu   = require('./teach_menu');
+
+let rl = '';
 
 let menu = function() {
-    let rl = readline.createInterface(process.stdin, process.stdout);
-    /*
-    readlineSync.setDefaultOptions({
-        // Simple Object that has toString method.
-        prompt: {
-            toString: function() {
-                return 'Pick one> ';
-            }
-        }
-    });*/
+    rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: false
+    });
 
-    console.log(`Choose an option:
+    console.log(`\nChoose an option:
     1- Create a new student
     2- Create a new teacher
     3- Enroll student to a course
@@ -27,35 +25,37 @@ let menu = function() {
     rl.setPrompt('Pick one> ');
     rl.prompt();
 
+    let name = '',
+        address = '',
+        birthDate = '',
+        average = '';
+
     rl.on('line', (data) => {
         switch (parseInt(data)) {
             case 1:
-                studentForm();
-                menu();
+                studentForm(rl);
                 break;
             case 2:
-                teacherForm();
-                menu();
+                teacherForm(rl);
                 break;
             case 3:
-                enrollMenu();
+                enrollMenu(rl);
                 break;
             case 4:
-                console.log('You picked the option 4');
+                teachMenu(rl);
                 break;
             case 5:
                 console.log('See ya!');
-                rl.close();
+                process.exit(0);
                 break;
             default:
-                console.log('Wrong option.');
-                rl.close();
+                console.log('Wrong option. Try again');
+                menu();
                 break;
         }
-        rl.prompt();
+        //rl.prompt();
     }).on('close', () => {
-        console.log('Program ends.');
-        process.exit(0);
+        menu();
     });
 };
 
