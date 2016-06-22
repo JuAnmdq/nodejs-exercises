@@ -25,11 +25,11 @@ let teachMenu = function(rl) {
 
     if (teacherList.length > 0) {
         rl.question('Pick a teacher (Id): ', (answer) => {
-            teacherId = answer;
+            teacherId = parseInt(answer);
 
             rl.question('Pick a course (Id): ', (answer) => {
-                courseId = answer;
-                console.log(`TeacherId: ${teacherId}, CourseId: ${courseId}`);
+                courseId = parseInt(answer);
+                setTeacherToCourse(teacherId, courseId);
                 rl.close();
             });
         });
@@ -37,6 +37,13 @@ let teachMenu = function(rl) {
         console.log('You haven\'t registered any teachers.');
         rl.close();
     }
+};
+
+let setTeacherToCourse = (teacherId, courseId) => {
+    let teacher = teacherList.find((teacher) => { return teacher.id === teacherId; }),
+        course = courseList.find((course) => { return course.id === courseId });
+
+    teacher.teachCourse(course);
 };
 
 module.exports = teachMenu;

@@ -11,8 +11,12 @@ class Student extends Person {
         this.avg_grade = avg_grade;
     }
 
-    enrollToCourse() {
-
+    enrollToCourse(course) {
+        if (this.avg_grade >= course.minimum_avg_grade) {
+            course.addStudent(this);
+        } else {
+            console.log('The average of the student is not enough to enroll to ' + course.name);
+        }
     }
 
     leaveCourse() {

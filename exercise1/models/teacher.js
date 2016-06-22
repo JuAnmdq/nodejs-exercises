@@ -10,8 +10,8 @@ class Teacher extends Person {
         this.id = ++id;
     }
 
-    teachCourse() {
-
+    teachCourse(course) {
+        course.setTeacher(this);
     }
 
     stopTeachingCourse() {

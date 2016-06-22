@@ -22,7 +22,7 @@ let studentForm = function(rl) {
                 birth_date = answer;
 
                 rl.question('Introduce your average: ', (answer) => {
-                    avg_grade = answer;
+                    avg_grade = parseInt(answer);
 
                     let student = new Student(name, address, birth_date, avg_grade);
 

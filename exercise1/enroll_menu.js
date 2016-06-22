@@ -1,8 +1,6 @@
 'use strict'
 
-// Evitar funciones sincrónicas en nodejs
 let studentList = require('./student_list'),
-    teacherList = require('./teacher_list'),
     courseList  = require('./course_list');
 
 let enrollMenu = function(rl) {
@@ -27,11 +25,12 @@ let enrollMenu = function(rl) {
 
     if (studentList.length > 0) {
         rl.question('Pick a student (Id): ', (answer) => {
-            studentId = answer;
+            studentId = parseInt(answer);
 
             rl.question('Pick a course (Id): ', (answer) => {
-                courseId = answer;
-                console.log(`StudentId: ${studentId}, CourseId: ${courseId}`);
+                courseId = parseInt(answer);
+                debugger;
+                enrollStudentToCourse(studentId, courseId);
                 rl.close();
             });
         });
@@ -39,6 +38,13 @@ let enrollMenu = function(rl) {
         console.log('You haven\'t registered any students.');
         rl.close();
     }
+};
+
+let enrollStudentToCourse = (studentId, courseId) => {
+    let student = studentList.find((student) => { return student.id === studentId; }),
+        course = courseList.find((course) => { return course.id === courseId });
+
+    student.enrollToCourse(course);
 };
 
 module.exports = enrollMenu;

@@ -5,7 +5,7 @@ class Person {
         this.name = name;
         this.address = address;
         this.birth_date = birth_date;
-        this.array = [];
+        this.friends = [];
     }
 
     getName() {

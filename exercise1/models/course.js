@@ -15,14 +15,8 @@ class Course {
         this.teacher = teacher;
     }
 
-    addStudent() {
-        for (let i = 0; i < arguments.length; i++) {
-            this.students.push(arguments[i]);
-        }
-    }
-
-    setTeacher(teacher) {
-        this.teacher = teacher;
+    addStudent(student) {
+        this.students.push(student);
     }
 
     removeStudent(id) {
