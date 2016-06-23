@@ -20,11 +20,14 @@ class Course {
     }
 
     removeStudent(id) {
-        for (let i = 0; i < this.students.length; i++) {
-            if (this.students[i].id === id) {
-                this.students.splice(i, 1);
-            }
-        }
+        let student = this.students.find((student) => { return student.id === id }),
+            index = this.students.indexOf(student);
+
+        this.students.splice(index, 1);
+    }
+
+    setId(_id) {
+        id = _id;
     }
 }
 

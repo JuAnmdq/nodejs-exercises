@@ -29,6 +29,18 @@ let enrollMenu = function(rl) {
 
             rl.question('Pick a course (Id): ', (answer) => {
                 courseId = parseInt(answer);
+
+                debugger;
+                if (!studentExists(studentId)) {
+                    console.log('\nThe student doesn\'t exists.');
+                    return rl.close();
+                }
+
+                if (!courseExists(courseId)) {
+                    console.log('\nThe course doesn\'t exists.');
+                    return rl.close();
+                }
+
                 enrollStudentToCourse(studentId, courseId);
                 rl.close();
             });
@@ -37,6 +49,14 @@ let enrollMenu = function(rl) {
         console.log('You haven\'t registered any students.');
         rl.close();
     }
+};
+
+let studentExists = (studentId) => {
+    return studentList.some((student) => { return student.id === studentId; });
+};
+
+let courseExists = (courseId) => {
+    return courseList.some((course) => { return course.id === courseId; });
 };
 
 let enrollStudentToCourse = (studentId, courseId) => {

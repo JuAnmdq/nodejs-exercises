@@ -4,7 +4,8 @@ const readline    = require('readline'),
       studentForm = require('./student_form'),
       teacherForm = require('./teacher_form'),
       enrollMenu  = require('./enroll_menu'),
-      teachMenu   = require('./teach_menu');
+      teachMenu   = require('./teach_menu'),
+      dao         = require('./dao');
 
 let rl = '';
 
@@ -45,8 +46,14 @@ let menu = function() {
                 teachMenu(rl);
                 break;
             case 5:
-                console.log('See ya!');
-                process.exit(0);
+                debugger;
+                dao.save().then((data) => {
+                    console.log('See ya!');
+                    console.log(data);
+                    process.exit(0);
+                }, (err) => {
+                    console.log(err);
+                });
                 break;
             default:
                 console.log('Wrong option. Try again');

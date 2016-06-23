@@ -29,7 +29,7 @@ let teachMenu = function(rl) {
 
             rl.question('Pick a course (Id): ', (answer) => {
                 courseId = parseInt(answer);
-                debugger;
+
                 if (!teacherExists(teacherId)) {
                     console.log('\nThe teacher doesn\'t exists.');
                     return rl.close();

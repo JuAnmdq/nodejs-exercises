@@ -69,7 +69,6 @@ function UserService() {
                     users[index] = newUser;
 
                     fs.writeFile('users.json', JSON.stringify(users, null, 2), (err) => {
-                        debugger;
                         if (err) {
                             users[index] = oldUser;
                             reject(err.message);

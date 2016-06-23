@@ -50,7 +50,6 @@ var main = () => {
     });
 
     UserService.retrieveByName(username).then((data) => {
-        debugger;
         console.log(data);
     }, (err) => {
         console.error(err);

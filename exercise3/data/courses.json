@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "name": "Maths",
+    "students": [],
+    "teacher": {},
+    "minimum_avg_grade": 8
+  },
+  {
+    "id": 2,
+    "name": "Chemestry",
+    "students": [
+      {
+        "name": "Alfredo",
+        "address": "Juan B. Justo 266",
+        "birth_date": "10/05/2006",
+        "friends": [],
+        "id": 1,
+        "avg_grade": 9
+      }
+    ],
+    "teacher": {
+      "name": "Ruben",
+      "address": "Tehue 2942",
+      "birth_date": "10/05/1951",
+      "friends": [],
+      "id": 1
+    },
+    "minimum_avg_grade": 7
+  },
+  {
+    "id": 3,
+    "name": "JavaScript",
+    "students": [
+      {
+        "name": "Shannet",
+        "address": "Paunero 26",
+        "birth_date": "10/08/1999\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D",
+        "friends": [],
+        "id": 2,
+        "avg_grade": 7
+      }
+    ],
+    "teacher": {
+      "name": "Monona",
+      "address": "Irala 2988",
+      "birth_date": "10/02/1960",
+      "friends": [],
+      "id": 2
+    },
+    "minimum_avg_grade": 6
+  }
+]
