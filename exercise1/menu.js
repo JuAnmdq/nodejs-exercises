@@ -43,11 +43,6 @@ let menu = function() {
     rl.setPrompt('Pick one> ');
     rl.prompt();
 
-    let name = '',
-        address = '',
-        birthDate = '',
-        average = '';
-
     rl.on('line', (data) => {
         options[parseInt(data)] ? options[parseInt(data)](rl) : error();
     }).on('close', () => {

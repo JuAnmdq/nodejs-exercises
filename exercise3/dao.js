@@ -27,7 +27,7 @@ function dao() {
                     if (err) {
                         reject(err.message);
                     }
-                    debugger;
+
                     courseList = JSON.parse(data);
 
                     teacherList = courseList.filter((course) => {
@@ -36,7 +36,6 @@ function dao() {
                         return course.teacher;
                     });
 
-                    debugger;
                     for (let i = 0; i < courseList.length; i++) {
                         for (let j = 0; j < courseList[i].students.length; j++) {
                             studentList.push(courseList[i].students[j]);

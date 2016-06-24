@@ -30,7 +30,6 @@ let enrollMenu = function(rl) {
             rl.question('Pick a course (Id): ', (answer) => {
                 courseId = parseInt(answer);
 
-                debugger;
                 if (!studentExists(studentId)) {
                     console.log('\nThe student doesn\'t exists.');
                     return rl.close();
