@@ -12,10 +12,9 @@ let menu = require('./menu'),
     dao  = require('./dao');
 
 dao.fetch().then((data) => {
-    console.log(data);
-    debugger;
     let courseList  = require('./course_list');
     console.log(courseList);
+    console.log(data);
     menu();
 }, (err) => {
     console.log(err);

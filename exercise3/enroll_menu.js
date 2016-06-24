@@ -6,17 +6,17 @@ let studentList = require('./student_list'),
 let enrollMenu = function(rl) {
     let studentMenu = 'Students:\n';
 
-    for (let i = 0; i < studentList.length; i++) {
-      studentMenu += `(${studentList[i].id}) ${studentList[i].name}\n`;
-    }
+    studentList.forEach((student) => {
+        studentMenu += `(${student.id}) ${student.name}\n`;
+    });
 
     console.log(studentMenu);
 
     let courseMenu = 'Courses:\n';
 
-    for (let i = 0; i < courseList.length; i++) {
-        courseMenu += `(${courseList[i].id}): ${courseList[i].name}\n`;
-    }
+    courseList.forEach((course) => {
+        courseMenu += `(${course.id}) ${course.name}\n`;
+    });
 
     console.log(courseMenu);
 
