@@ -29,6 +29,17 @@ let teachMenu = function(rl) {
 
             rl.question('Pick a course (Id): ', (answer) => {
                 courseId = parseInt(answer);
+
+                if (!teacherExists(teacherId)) {
+                    console.log('\nThe teacher doesn\'t exists.');
+                    return rl.close();
+                }
+
+                if (!courseExists(courseId)) {
+                    console.log('\nThe course doesn\'t exists.');
+                    return rl.close();
+                }
+
                 setTeacherToCourse(teacherId, courseId);
                 rl.close();
             });
@@ -37,6 +48,14 @@ let teachMenu = function(rl) {
         console.log('You haven\'t registered any teachers.');
         rl.close();
     }
+};
+
+let teacherExists = (teacherId) => {
+    return teacherList.some((teacher) => { return teacher.id === teacherId; });
+};
+
+let courseExists = (courseId) => {
+    return courseList.some((course) => { return course.id === courseId; });
 };
 
 let setTeacherToCourse = (teacherId, courseId) => {

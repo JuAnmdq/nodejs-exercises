@@ -8,6 +8,24 @@ const readline    = require('readline'),
 
 let rl = '';
 
+let exit = () => {
+    console.log('\nSee ya!');
+    process.exit(0);
+};
+
+let error = () => {
+    console.log('Wrong option. Try again');
+    menu();
+};
+
+let options = {
+    1: studentForm,
+    2: teacherForm,
+    3: enrollMenu,
+    4: teachMenu,
+    5: exit
+};
+
 let menu = function() {
     rl = readline.createInterface({
         input: process.stdin,
@@ -31,29 +49,7 @@ let menu = function() {
         average = '';
 
     rl.on('line', (data) => {
-        switch (parseInt(data)) {
-            case 1:
-                studentForm(rl);
-                break;
-            case 2:
-                teacherForm(rl);
-                break;
-            case 3:
-                enrollMenu(rl);
-                break;
-            case 4:
-                teachMenu(rl);
-                break;
-            case 5:
-                console.log('See ya!');
-                process.exit(0);
-                break;
-            default:
-                console.log('Wrong option. Try again');
-                menu();
-                break;
-        }
-        //rl.prompt();
+        options[parseInt(data)] ? options[parseInt(data)](rl) : error();
     }).on('close', () => {
         menu();
     });
